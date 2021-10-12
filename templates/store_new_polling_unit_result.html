@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="row justify-content-center mt-5">
+    <div class="col-lg-10">
+        <h2>New Polling Result</h2>
+        <hr>
+        <div class="card mb-4">
+            <div class="card-header text-center lead fw-bold">
+                Store New Polling Unit Result Form
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <button class="btn btn-success d-block w-100 fw-bold">Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

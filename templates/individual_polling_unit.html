@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="row justify-content-center mt-5">
+    <div class="col-lg-10">
+        <h2>Indiviudal Polling Unit</h2>
+        <hr>
+        <div class="card mb-4">
+            <div class="card-header text-center lead fw-bold">
+                Get Indiviudal Polling Unit Form
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <button class="btn btn-success d-block w-100 fw-bold">Get</button>
+                </form>
+            </div>
+        </div>
+        {% if request.session.individual_results %}
+        <table id="polling-unit-data" class="table table-striped my-5">
+            <thead>
+                <tr>
+                    <th>Polling Unit ID</th>
+                    <th>Polling Unit Number</th>
+                    <th>Polling Unit Name</th>
+                    <th>Part Abbreviation</th>
+                    <th>Party Score</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for polling_unit in request.session.individual_results %}
+                    <tr>
+                        <td>{{ polling_unit.polling_unit_uniqueid }}</td>
+                        <td>{{ request.session.polling_unit_number }}</td>
+                        <td>{{ request.session.polling_unit_name }}</td>
+                        <td>{{ polling_unit.party_abbreviation }}</td>
+                        <td>{{ polling_unit.party_score }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+    </div>
+</div>
+{% endblock content %}

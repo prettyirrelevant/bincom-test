@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="row justify-content-center mt-5">
+    <div class="col-lg-10">
+        <h2>Summed Total of Polling Units Results in LGA</h2>
+        <hr>
+        <div class="card mb-4">
+            <div class="card-header text-center lead fw-bold">
+                Get Summed Total of Polling Units Results in LGA Form
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <button class="btn btn-success d-block w-100 fw-bold">Get</button>
+                </form>
+            </div>
+        </div>
+        {% if request.session.lga_results %}
+        <table id="polling-unit-data" class="table table-striped my-5">
+            <thead>
+                <tr>
+                    <th>S/N</th>
+                    <th>LGA Name</th>
+                    <th>Party Abbreviation</th>
+                    <th>Total Votes</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for result in request.session.lga_results %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ request.session.lga_name }}</td>
+                        <td>{{ result.party_abbreviation }}</td>
+                        <td>{{ result.total_votes }}</td>
+                        <td>{{ result.result_number }}</td>
+                        <td>{{ result.result_name }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+            <h4 class="text-center mt-5">No results found for "{{ request.session.lga_name }}"</h4>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock content %}

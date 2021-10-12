@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-10 mb-2">
+        <h1 class="text-center mt-5 fs-1 fw-bold">Bincom Django Test.</h1>
+        <div class="row gap-2" style="margin-top: 10em">
+        <a class="btn btn-primary col" href="{% url 'core:individual-polling-unit' %}" role="button">View Individual Polling Units</a>
+            <a class="btn btn-primary col" href="{% url 'core:summed-polling-units-in-lga' %}" role="button">View Summed Polling Units Result in LGA</a>
+            <a class="btn btn-primary col" href="{% url 'core:store-new-polling-unit-result' %}" role="button">Store Polling Unit Result</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
